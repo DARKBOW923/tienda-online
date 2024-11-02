@@ -1,20 +1,15 @@
 <?php
-
-
-
-
 $mysqli = new mysqli ('192.168.1.40', 'root2', 'smx', 'onlineStore');
 require 'functions.php';
 
-
-
-if (!isset($currentCategory['category'])){
-    echo "Current category selected: none";
+if (isset($_GET['category'])){
+    echo "Current category selected:".$_GET['category'];
+    $result = getProductByCategory($_GET['category'],$mysqli);
 }else{
-    echo "THIS IS THE CATEGORY!".$currentCategory['category'];
+    echo "No category".$_GET['category'];
+    listProducts($mysqli);
 }
-listProducts($mysqli);
-$result = test($_GET['category']);
+listAllCategories($mysqli);
 
 /*$products = $mysqli->query("SELECT * FROM products where category ='".$_GET['category']."'");
 forEach ($products as $product){
